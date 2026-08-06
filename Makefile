@@ -15,8 +15,10 @@ build:
 app: build
 	@echo "→ Creating $(BUNDLE)…"
 	@mkdir -p $(MACOS)
+	@mkdir -p $(BUNDLE)/Contents/Resources
 	@cp $(BINARY) $(MACOS)/$(APP)
 	@cp Resources/Info.plist $(PLIST)
+	@cp Resources/AppIcon.icns $(BUNDLE)/Contents/Resources/AppIcon.icns 2>/dev/null || true
 	@echo "→ Ad-hoc signing…"
 	@codesign --force --deep --sign - $(BUNDLE)
 	@echo "✓ $(BUNDLE) ready"
